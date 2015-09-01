@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+</head>
+<body ng-app="app">
+<script>
+    angular.module('app', ['ngAria', 'ngAnimate', 'ngMaterial'])
+            .controller('dialogCtrl', function ($mdDialog, advancedDialog) {
+                var self = this;
+                self.hi = "Hello";
+
+                self.showAlert = function (e) {
+                    $mdDialog.show(
+                            $mdDialog.alert()
+                                    .parent(angular.element(document.querySelector('#popupContainer')))
+                                    .title('This is a dialog for the first time')
+                                    .content('This content of dialog box')
+                                    .ok('on on')
+                                    .targetEvent(e)
+                    );
+                };
+
+                self.showConfirm = function () {
+                    $mdDialog.show(
+                            $mdDialog.confirm()
+                                    .title('پیغام تایید')
+                                    .ok('تایید!')
+                                    .cancel('انصراف')
+                    ).then(function () {
+                                debugger;
+                            }).catch(function () {
+                                debugger;
+                            });
+                }
+
+                self.showAdvaned = function () {
+                    var promise = advancedDialog.show();
+                    promise.then(function () {
+                        debugger;
+                    });
+                    debugger;
+                    /*$mdDialog.show(
+                     $mdDialog.show({
+                     controller: dialogCtrl,
+                     templateUrl: 'dialog.tmp.html'
+                     })
+                     .then(function () {
+                     debugger;
+                     })
+                     .catch(function () {
+                     debugger;
+                     })
+                     )*/
+                }
+
+            });
+
+    function dialogCtrl($scope, $mdDialog) {
+        var self = $scope;
+
+        self.hide = function () {
+            $mdDialog.hide();
+        };
+
+        self.cancel = function () {
+            $mdDialog.cancel();
+        }
+
+        self.answer = function (answer) {
+            $mdDialog.hide(answer);
+        }
+    }
+
+    angular.module('app').factory('modalBase', function ($mdDialog) {
+        return function (option) {
+            return {
+                show: function () {
+                    return $mdDialog.show({
+                        controller: option.controller,
+                        templateUrl: option.templateUrl
+                    });
+                }
+            }
+        }
+    });
+
+    angular.module('app').factory('advancedDialog', function (modalBase) {
+        return modalBase({
+            controller: dialogCtrl,
+            templateUrl: 'dialog.tmp.html'
+        });
+    });
+
+    angular.module('app').config(function ($mdIconProvider) {
+        debugger;
+    });
+</script>
+
+<div ng-controller="dialogCtrl as ctrl">
+
+    <div id="popupContainer"
+         style="width: 500px;height: 500px;border: dashed green;color: beige">
+        <button ng-click="ctrl.showAlert()">Show Alert</button>
+    </div>
+    <button ng-click="ctrl.showConfirm()">Show Confirm</button>
+    <button ng-click="ctrl.showAdvaned()">Show Advanved</button>
+
+    <div layout="row">
+        <div>I'm left.</div>
+        <div>I'm right.</div>
+    </div>
+    <div layout="column">
+        <div>I'm above.</div>
+        <div>I'm below.</div>
+    </div>
+</div>
+</body>
+</html>
