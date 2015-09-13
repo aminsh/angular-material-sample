@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+</head>
+<body>
+<!--<div layout="row">
+    <div>I'm left.</div>
+    <div>I'm right.</div>
+</div>
+<div layout="column">
+    <div>I'm above.</div>
+    <div>I'm below.</div>
+</div>-->
+
+<!--
+<ul>
+    <li>
+        <h3>600 px => phones</h3>
+    </li>
+    <li>
+        <h3> > 600 px => bigger than phones</h3>
+    </li>
+    <li>
+        <h3>between 600 and 960px => tablet in portrait</h3>
+    </li>
+    <li>
+        <h3>> 960 px => bigger than tablets in portrait</h3>
+    </li>
+    <li>
+        <h3>960 and 1200 px => bigger than tablets in landscape</h3>
+    </li>
+    <li>
+        <h3>> 1200 px => Computer and large screens</h3>
+    </li>
+</ul>
+<h1>It`s column layout in less than 600px</h1>
+
+<div layout="row" layout-sm="column">
+    <div flex style="background-color: #26C6DA">
+        I'm above on mobile, and to the left on larger devices.
+    </div>
+    <div flex style="background-color: #689F38">
+        I'm below on mobile, and to the right on larger devices.
+    </div>
+</div>
+
+<h1>It`s column layout in greater than 600px</h1>
+<div layout="column" layout-gt-sm="row">
+    <div flex style="background-color: #26C6DA">
+        I'm above on mobile, and to the left on larger devices.
+    </div>
+    <div flex style="background-color: #689F38">
+        I'm below on mobile, and to the right on larger devices.
+    </div>
+</div>
+
+-->
+
+<br/>
+<br/>
+<br/>
+<!--
+<h1>It`s row layout in less than 600px</h1>
+<div layout="row" layout-sm="row" >
+    <div flex style="background-color: #26C6DA;height: 200px">
+        I'm above on mobile, and to the left on larger devices.
+    </div>
+    <div flex style="background-color: #ff80ab;height: 200px">
+        I'm below on mobile, and to the right on larger devices.
+    </div>
+</div>
+-->
+
+<!--<h1>layout margin</h1>
+<div layout="row" layout-sm="row" layout-margin layout-padding>
+    <div flex style="background-color: #26C6DA;height: 200px">
+        I'm above on mobile, and to the left on larger devices.
+    </div>
+    <div flex style="background-color: #ff80ab;height: 200px">
+        I'm below on mobile, and to the right on larger devices.
+    </div>
+</div>
+
+<h1>layout padding</h1>
+<div layout="row" layout-sm="row" layout-padding>
+    <div flex style="background-color: #26C6DA;height: 200px">
+        I'm above on mobile, and to the left on larger devices.
+    </div>
+    <div flex style="background-color: #ff80ab;height: 200px">
+        I'm below on mobile, and to the right on larger devices.
+    </div>
+</div>-->
+
+<!--<h1>layout fill</h1>
+<div layout="row" layout-sm="row" layout-fill>
+    <div flex style="background-color: #26C6DA;height: 200px">
+        I'm above on mobile, and to the left on larger devices.
+    </div>
+    <div flex style="background-color: #ff80ab;height: 200px">
+        I'm below on mobile, and to the right on larger devices.
+    </div>
+</div>-->
+
+<!--<div layout="row" layout-wrap>
+    <div flex="33" style="background-color: #26C6DA;height: 100px">[flex=33]</div>
+    <div flex="66" style="background-color: #ff8a80;height: 100px">[flex=66]</div>
+    <div flex="66" style="background-color: #8c9eff;height: 100px">[flex=66]</div>
+    <div flex="33" style="background-color: #42A5F5;height: 100px">[flex=33]</div>
+    <div flex="33" style="background-color: #ff8a80;height: 100px">[flex=33]</div>
+    <div flex="33" style="background-color: #323232;height: 100px">[flex=33]</div>
+</div>-->
+
+<div layout="row">
+    <div flex="10" flex-sm="30" style="background-color: dodgerblue;height: 100px">
+        I flex to one-third of the space on mobile, and two-thirds on other devices.
+    </div>
+    <div flex="10" flex-sm="10" style="background-color: green;height: 100px">
+        I flex to two-thirds of the space on mobile, and one-third on other devices.
+    </div>
+</div>
+
+<div layout="row">
+    <div flex="66" flex-sm="33" flex-gt-lg="99" style="background-color: yellow;height: 100px">
+        I flex to one-third of the space on mobile, and two-thirds on other devices.
+    </div>
+    <div flex="33" flex-sm="66" style="background-color: black;height: 100px">
+        I flex to two-thirds of the space on mobile, and one-third on other devices.
+    </div>
+</div>
+
+<div layout="row" layout-margin style="border: dashed">
+    <div flex flex-order="1" style="background-color: yellowgreen;height: 100px">
+        [flex-order="3"]
+    </div>
+    <div flex flex-order="1" style="background-color: black;height: 100px">
+        [flex-order="2"]
+    </div>
+    <div flex flex-order="9" style="background-color: gold;height: 100px">
+        [flex-order="8"]
+    </div>
+</div>
+
+<div hide-sm style="background-color: gold;height: 100px"></div>
+</body>
+</html>
