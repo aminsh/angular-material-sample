@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+    <script src="assets/jquery.js"></script>
+</head>
+<body>
+<script>
+    $(function () {
+        $('#btn').click(function () {
+            $('#container')
+                    .append('<div  style="border: dashed;height: 100px;width: 300px;float: left">[float]</div>');
+        })
+    })
+</script>
+
+<button id="btn">Add</button>
+<div id="container" >
+
+</div>
+
+
+<div layout="row" layout-wrap style="width: 100%">
+    <div flex flex-gt-md="33" flex-sm="99" style="background-color: #26C6DA;height: 100px">[flex=33]</div>
+    <div flex flex-gt-md="33" flex-sm="99" style="background-color: #ff8a80;height:100px">[flex=66]</div>
+    <div flex flex-gt-md="33" flex-sm="99" style="background-color: #8c9eff;height: 100px">[flex=66]</div>
+    <div flex flex-gt-md="33" flex-sm="99" style="background-color: #42A5F5;height: 100px">[flex=33]</div>
+    <div flex flex-gt-md="33" flex-sm="99" style="background-color: #ff8a80;height: 100px">[flex=33]</div>
+    <div flex flex-gt-md="33" flex-sm="99" style="background-color: #323232;height: 100px">[flex=33]</div>
+
+</div>
+
+
+</body>
+</html>

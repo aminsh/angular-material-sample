@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="assets/kendo.common.min.css" rel="stylesheet">
+    <link href="assets/kendo.material.min.css" rel="stylesheet">
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+
+    <script src="assets/jquery.js"></script>
+    <!--<script src="http://cdn.kendostatic.com/2015.2.624/js/kendo.all.min.js"></script>-->
+    <script src="assets/kendo.all.min.js"></script>
+</head>
+<body>
+<script>
+    function createChart($element) {
+        $element.kendoChart({
+            title: {
+                //text: "What is you favourite sport?"
+            },
+            legend: {
+                position: "top"
+            },
+
+            series: [{
+                type: "donut",
+                data: [{
+                    category: "Football",
+                    value: 35
+                }, {
+                    category: "Basketball",
+                    value: 25
+                }, {
+                    category: "Volleyball",
+                    value: 20
+                }, {
+                    category: "Rugby",
+                    value: 10
+                }, {
+                    category: "Tennis",
+                    value: 10
+                }]
+            }],
+            tooltip: {
+                visible: false,
+//                template: "#= category # - #= kendo.format('{0:P}', percentage) #"
+            },
+            select: function (e) {
+                debugger;
+            },
+            axisLabelClick: function (e) {
+                debugger;
+            },
+            legendItemClick: function(e){
+                debugger;
+            },
+            legendItemHover: function (e) {
+
+            },
+
+            plotAreaClick: function (e) {
+                debugger;
+            },
+            seriesClick: function (e) {
+                alert(e.dataItem.category);
+            },
+            seriesHover: function (e) {
+                var x = 1;
+            },
+        });
+    }
+    $(function () {
+
+        $('.chart').each(function(){
+            createChart($(this));
+        });
+
+
+
+    })
+</script>
+
+<h1> Row => Bigger tablet in portrait</h1>
+<div layout="column" layout-gt-md="row">
+    <div flex class="chart"></div>
+    <div flex class="chart"></div>
+    <div flex class="chart"></div>
+</div>
+
+<h1> Column => 600 px</h1>
+<div layout="row" layout-sm="column">
+    <div flex class="chart"></div>
+    <div flex class="chart"></div>
+    <div flex class="chart"></div>
+</div>
+
+layout-wrap
+<h1>layout-wrap</h1>
+<div layout="row" layout-wrap>
+    <div flex="66" class="chart"></div>
+    <div flex="66" class="chart"></div>
+    <div flex="66" class="chart"></div>
+</div>
+<h1>float</h1>
+<div>
+    <div class="chart" style="float: left"></div>
+    <div class="chart" style="float: left"></div>
+    <div class="chart" style="float: left"></div>
+</div>
+
+
+
+</body>
+</html>
