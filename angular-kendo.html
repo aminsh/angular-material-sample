@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="assets/kendo.common.min.css" rel="stylesheet">
+    <link href="assets/kendo.material.min.css" rel="stylesheet">
+    <link href="node_modules/angular-material/angular-material.css" rel="stylesheet"/>
+
+    <script src="assets/jquery.js"></script>
+    <script src="assets/kendo.all.min.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="assets/kendo.angular.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+
+<script>
+    angular.module('app', ['kendo.directives', 'ngMaterial'])
+            .controller('ctrl', function ($scope) {
+                $scope.title = "HELLO";
+                $scope.ds = {
+                    data: [
+                        {key: 1, fName: 'amin', lName: 'sheikhi'},
+                        {key: 2, fName: 'ali', lName: 'hassani'},
+                        {key: 3, fName: 'ksdjflas', lName: 'lName'}
+                    ]
+                };
+
+                $scope.dataSource = new kendo.data.DataSource({
+                    pageSize: 20,
+                    data: [
+                        {id: 1, firstName: 'ali', lastName: 'hassani'},
+                        {id: 2, firstName: 'ali', lastName: 'hassani'},
+                        {id: 3, firstName: 'ali', lastName: 'hassani'}
+                    ],
+                    autoSync: true,
+                    schema: {
+                        id: 'id',
+                        fields: {
+                            model: {
+                                id: {type: 'number'},
+                                firstName: {type: 'string'},
+                                lastName: {type: 'string'}
+                            }
+                        }
+                    }
+                })
+
+                $scope.fNameEditor = function (container, options) {
+                    debugger;
+                    $(
+                            '<md-input-container>' +
+                            '<label>First name</label>' +
+                            '<input ng-model="dataItem.firstName" />' + /*data-bind="value:' + options.field + '"*/
+                            '</md-input-container>')
+                            .appendTo(container);
+
+                }
+
+                $scope.lNameEditor = function (container, options) {
+                    debugger;
+                    $(
+                            '<md-input-container>' +
+                            '<label>First name</label>' +
+                            '<input ng-model="dataItem.lastName" data-bind="value:' + options.field + '"/>' +
+                            '</md-input-container>')
+                            .appendTo(container);
+
+                }
+                $scope.gridOption = {
+                    dataSource: $scope.dataSource,
+                    columns: [
+                        {field: 'id', title: 'ID'},
+                        {field: 'firstName', title: 'Fist Name', editor: $scope.fNameEditor},
+                        {field: 'lastName', title: 'Last Name', editor: $scope.lNameEditor},
+                        {command: ["edit", "destroy"]}
+                    ],
+                    toolbar: ['create',
+                        {
+                            name: 'select',
+                            text: 'Select',
+                            imageCss: 'k-add',
+                            click: function (e) {
+                                debugger;
+                                console.log(e);
+                            }
+                        }
+                    ],
+                    editable: 'inline'/*{
+                     mode: 'popup',
+                     template: kendo.template($("#template").html())
+                     }*/
+                }
+            });
+
+
+</script>
+
+<h1>{{title}}</h1>
+
+<select kendo-combo-box
+        k-data-source='ds'
+        k-placeholder="'Select product'"
+        k-data-text-field="'fName'"
+        k-data-value-field="'key'"></select>
+
+<md-input-container>
+    <label>First name</label>
+    <input>
+</md-input-container>
+
+<kendo-grid options="gridOption"></kendo-grid>
+
+
+<script type="text/x-kendo-template" id="template">
+    <md-input-container>
+        <label>First name</label>
+        <input ng-model="dataItem.fName">
+    </md-input-container>
+    <md-input-container>
+        <label>Last name</label>
+        <input ng-model="dataItem.lName">
+    </md-input-container>
+
+</script>
+</body>
+</html>

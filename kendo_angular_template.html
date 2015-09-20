@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="assets/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+
+
+    <script src="assets/kendo.all.min.js"></script>
+
+    <link href="node_modules/angular-material/angular-material.css" rel="stylesheet"/>
+    <link href="assets/kendo.common.min.css" rel="stylesheet"/>
+    <link href="assets/kendo.material.min.css" rel="stylesheet"/>
+</head>
+<body ng-app="app">
+<script>
+    angular.module('app', ['ngAria', 'ngAnimate', 'ngMaterial'])
+            .directive('grid', function () {
+                return {
+                    restrict: 'E',
+                    replace: true,
+                    template: '<div></div>',
+                    link: function (scope, element) {
+                        var grid = $(element).kendoGrid({
+                            dataSource: {
+                                data: [
+                                    {id: 1, firstName: 'ali', lastName: 'lname'},
+                                    {id: 1, firstName: 'hassan', lastName: 'lname'},
+                                    {id: 1, firstName: 'amir', lastName: 'lname'}
+                                ],
+                                schema: {
+                                    model: {
+                                        fields: {
+                                            id: {type: "number"},
+                                            firstName: {type: "string"},
+                                            lastName: {type: "string"},
+                                        }
+                                    }
+                                }
+                            },
+                            toolbar: [
+                                {
+                                    name: 'copy', text: 'Copy', click: function (e) {
+                                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                                    console.log(dataItem);
+                                }
+                                }
+                            ],
+                            columns: [
+                                "id",
+                                {field: "firstName", title: "First name"},
+                                {field: "lastName", title: "Last name"},
+                                {
+                                    command: ["edit", "destroy",
+                                        {
+                                            name: 'copy', text: 'Copy', click: function (e) {
+                                            var rows = grid.select();
+                                            var dataItem = grid .dataItem(rows);
+                                            //var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                                            console.log(dataItem);
+                                        }
+                                        }
+                                    ]
+                                }
+                            ],
+                            selectable: true,
+                            editable: {
+                                mode: 'inline',
+                                //template: kendo.template($("#template").html())
+                            },
+
+//                            rowTemplate: kendo.template($("#rowTemplate").html()),
+                        }).data("kendoGrid");
+
+                    }
+                }
+            })
+            .controller('kendoCtrl', function () {
+                var self = this;
+                self.hi = "Hello";
+
+            });
+</script>
+
+<div ng-controller="kendoCtrl as ctrl">
+    <grid></grid>
+    <md-input-container>
+        <label>First name</label>
+        <input>
+    </md-input-container>
+</div>
+
+<script type="text/x-kendo-template" id="template">
+    <md-input-container>
+        <label>First name</label>
+        <input type="text" ng-model="dataItem.firstName">
+    </md-input-container>
+    <md-input-container>
+        <label>First name</label>
+        <input type="text" ng-model="dataItem.lastName">
+    </md-input-container>
+</script>
+</body>
+</html>
