@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="assets/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+
+
+    <script src="assets/kendo.all.min.js"></script>
+
+    <link href="node_modules/angular-material/angular-material.css" rel="stylesheet"/>
+
+    <script src="node_modules/moment-jalaali/node_modules/moment/moment.js"></script>
+    <script src="node_modules/moment-jalaali/build/moment-jalaali.js"></script>
+</head>
+<body>
+<script>
+    angular.module('app', ['ngAnimate', 'ngAria', 'ngMaterial'])
+            .config(function ($mdDateLocaleProvider) {
+                debugger;
+
+                /*moment.locale('fr');
+                 $mdDateLocaleProvider.months = moment.localeData()._jMonths;
+                 $mdDateLocaleProvider.months = moment.localeData().jMonthsShort
+                 console.log(window.moment ? 'moment loaded' : 'not loaded');*/
+
+                //moment.locale('fr');
+                moment.loadPersian();
+                $mdDateLocaleProvider.days = moment()._locale._weekdays;
+                $mdDateLocaleProvider.shortDays = moment()._locale._weekdaysMin;
+                $mdDateLocaleProvider.months = moment()._locale._jMonths;
+                $mdDateLocaleProvider.shortMonths = moment()._locale._jMonths;
+
+                $mdDateLocaleProvider.days = moment.weekdays();
+                $mdDateLocaleProvider.shortDays = moment.weekdaysMin();
+
+                $mdDateLocaleProvider.parseDate = function (dateString) {
+                    debugger;
+                    return moment(dateString).toDate();
+                };
+
+                $mdDateLocaleProvider.formatDate = function (date) {
+                    return moment(date).format('L');
+                };
+
+                $mdDateLocaleProvider.longDateFormatter = function (date) {
+                    return moment(date).format('LL');
+                };
+
+                $mdDateLocaleProvider.monthHeaderFormatter = function (date) {
+                    moment()._locale._jMonths[date.getMonth()] + ' ' + date.getFullYear();
+                };
+
+                $mdDateLocaleProvider.weekNumberFormatter = function (weekNumber) {
+                    return 'Semaine ' + weekNumber;
+                };
+            })
+            .controller('ctrl', function ($scope) {
+                $scope.myDate = new Date();
+            });
+</script>
+
+
+<div ng-app="app" ng-controller="ctrl" style='padding: 40px;'>
+    <md-content>
+
+        <h4>Date de naissance</h4>
+        <md-datepicker ng-model="myDate" md-placeholder="Entrez une date"></md-datepicker>
+
+    </md-content>
+</div
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/node_modules/angular-route/angular-route.js"></script>
+
+</head>
+<body ng-app="app">
+<script>
+    angular.module('app', ['ngRoute'])
+            .factory('context', function ($q, $timeout) {
+                debugger;
+                var deferred = $q.defer();
+                $timeout(function () {
+                    deferred.resolve({
+                        id: '1',
+                        name: 'test',
+                        date: new Date
+                    });
+                });
+                return deferred.promise;
+            })
+            .config(function ($routeProvider) {
+                $routeProvider
+                        .when("/home", {
+                            templateUrl: '/template/home.html',
+                            controller: 'homeCtrl',
+                            resolve: {
+                                user: function (context) {
+                                    return context;
+                                }
+                            }
+                        })
+                        .when("/about", {
+                            templateUrl: '/template/about.html',
+                            controller: 'aboutCtrl',
+                            resolve: {
+                                user: function (context) {
+                                    return context;
+                                }
+                            }
+                        });
+            })
+            .controller('homeCtrl', function ($scope, user) {
+                debugger;
+                $scope.title = "Home";
+            })
+            .controller('aboutCtrl', function ($scope, user) {
+                debugger;
+                $scope.title = "About";
+            })
+</script>
+
+<div ng-view>
+    ......
+</div>
+</body>
+</html>

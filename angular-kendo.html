@@ -19,7 +19,7 @@
 
 <script>
     angular.module('app', ['kendo.directives', 'ngMaterial'])
-            .controller('ctrl', function ($scope) {
+            .controller('ctrl', function ($scope, $timeout) {
                 $scope.title = "HELLO";
                 $scope.ds = {
                     data: [
@@ -29,21 +29,40 @@
                     ]
                 };
 
-                $scope.dataSource = new kendo.data.DataSource({
+                $scope.statusDs = new kendo.data.dataSource({
+                    data: [
+                        {key: 0, value: 'ToDO'},
+                        {key: 1, value: 'Doing'},
+                        {key: 2, value: 'Done'}
+                    ]
+                });
+
+                $scope.fetchStatus = function () {
+                    $timeout(function () {
+                        $scope.statusDs.read()
+                                .then(function () {
+                                    sta
+                                })
+                    })
+                }
+                $scope.currentStatus = 0;
+
+                window.a = $scope.dataSource = new kendo.data.DataSource({
                     pageSize: 20,
                     data: [
-                        {id: 1, firstName: 'ali', lastName: 'hassani'},
-                        {id: 2, firstName: 'ali', lastName: 'hassani'},
-                        {id: 3, firstName: 'ali', lastName: 'hassani'}
+                        {id: 1, firstName: 'ali', lastName: 'hassani', status: 0},
+                        {id: 2, firstName: 'ali', lastName: 'hassani', status: 1},
+                        {id: 3, firstName: 'ali', lastName: 'hassani', status: 2}
                     ],
                     autoSync: true,
                     schema: {
-                        id: 'id',
-                        fields: {
-                            model: {
+                        model: {
+                            id: 'id',
+                            fields: {
                                 id: {type: 'number'},
                                 firstName: {type: 'string'},
-                                lastName: {type: 'string'}
+                                lastName: {type: 'string'},
+                                status: {defaultValue: status[0]}
                             }
                         }
                     }
@@ -70,12 +89,33 @@
                             .appendTo(container);
 
                 }
+
+                $scope.statusEditor = function (container, options) {
+                    debugger;
+                    $('<md-input-container>' +
+                            '<md-select ng-model="dataItem.status">' +
+                            '<md-option ng-value="s" ng-repeat="s in status" value="{{s.value}}">' +
+                            '{{s.value}}' +
+                            '</md-option>' +
+                            '</md-select>' +
+                                //'{{dataItem.status.value}}' +
+                            '</md-input-container>')
+                            .appendTo(container);
+                };
+
                 $scope.gridOption = {
                     dataSource: $scope.dataSource,
                     columns: [
                         {field: 'id', title: 'ID'},
                         {field: 'firstName', title: 'Fist Name', editor: $scope.fNameEditor},
                         {field: 'lastName', title: 'Last Name', editor: $scope.lNameEditor},
+                        {field: 'statusRead', title: 'Status Read', template: '${status.value}'},
+                        {
+                            field: 'status',
+                            title: 'Status',
+                            editor: $scope.statusEditor,
+                            template: '${data.status.value}'
+                        },
                         {command: ["edit", "destroy"]}
                     ],
                     toolbar: ['create',
@@ -111,6 +151,19 @@
     <label>First name</label>
     <input>
 </md-input-container>
+
+<md-input-container>
+    <label>Status</label>
+    <md-select ng-model="currentStatus">
+        <md-option ng-value="s.key" ng-repeat="s in status" value="{{s.value}}">
+            {{s.value}}
+        </md-option>
+    </md-select>
+    <!--{{currentStatus.value}}-->
+</md-input-container>
+
+<h1>{{currentStatus}}</h1>
+
 
 <kendo-grid options="gridOption"></kendo-grid>
 
