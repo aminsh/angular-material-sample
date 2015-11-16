@@ -16,7 +16,7 @@
 <body>
 <script>
     function createChart($element) {
-        $element.kendoChart({
+        window.kChart =  $element.kendoChart({
             theme: 'material',
             title: {
                 //text: "What is you favourite sport?"
@@ -65,6 +65,10 @@
                 debugger;
             },
             seriesClick: function (e) {
+                //debugger;
+                var $element = $(e.element);
+                $element.css('stroke', '#767C82');
+                $element.css('stroke-width', '10px');
                 alert(e.dataItem.category);
             },
             seriesHover: function (e) {
