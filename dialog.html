@@ -14,7 +14,15 @@
 <body ng-app="app">
 <script>
     angular.module('app', ['ngAria', 'ngAnimate', 'ngMaterial'])
+            .config(function ($mdThemingProvider) {
+                $mdThemingProvider.theme('default')
+                        .backgroundPalette('blue-grey')
+                        .primaryPalette('blue-grey')
+                        .accentPalette('blue-grey')
+                        .warnPalette('orange');
+            })
             .controller('dialogCtrl', function ($mdDialog, advancedDialog) {
+                debugger;
                 var self = this;
                 self.hi = "Hello";
 
@@ -107,12 +115,68 @@
 
 <div ng-controller="dialogCtrl as ctrl">
 
-    <div id="popupContainer"
+   <!-- <div id="popupContainer"
          style="width: 500px;height: 500px;border: dashed green;color: beige">
-        <button ng-click="ctrl.showAlert()">Show Alert</button>
-    </div>
-    <button ng-click="ctrl.showConfirm()">Show Confirm</button>
-    <button ng-click="ctrl.showAdvaned()">Show Advanved</button>
+        <md-button ng-click="ctrl.showAlert()">Show Alert</md-button>
+    </div>-->
+
+    <md-content>
+        <br>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Settings">
+                    <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                </md-button>
+                <h2>
+                    <span>Toolbar with Icon Buttons</span>
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Favorite">
+                    <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="More">
+                    <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <br>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button aria-label="Go Back">
+                    Go Back
+                </md-button>
+                <h2>
+                    <span>Toolbar with Standard Buttons</span>
+                </h2>
+                <span flex></span>
+                <md-button class="md-raised" aria-label="Learn More">
+                    Learn More
+                </md-button>
+                <md-button class="md-fab md-mini " aria-label="Favorite">
+                    <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <br>
+        <md-toolbar class="md-tall md-accent">
+            <h2 class="md-toolbar-tools">
+                <span>Toolbar: tall (md-accent)</span>
+            </h2>
+        </md-toolbar>
+        <br>
+        <md-toolbar class="md-tall md-warn md-hue-3">
+            <span flex></span>
+            <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+                <span class="md-flex">Toolbar: tall with actions pin to the bottom (md-warn md-hue-3)</span>
+            </h2>
+        </md-toolbar>
+    </md-content>
+    
+    <md-content layout-padding layout="column">
+        <md-button ng-click="ctrl.showAlert()">Show Alert</md-button>
+    </md-content>
+    <md-button ng-click="ctrl.showConfirm()">Show Confirm</md-button>
+    <md-button ng-click="ctrl.showAdvaned()">Show Advanved</md-button>
 
     <div layout="row">
         <div>I'm left.</div>
@@ -122,6 +186,14 @@
         <div>I'm above.</div>
         <div>I'm below.</div>
     </div>
+
+    <md-button class="md-raised md-primary">Primary</md-button>
+    <md-button class="md-raised md-accent">Accent</md-button>
+    <md-button class="md-raised md-warn">Warn</md-button>
+
+    <md-button class="md-primary">Primary</md-button>
+    <md-button class="md-accent">Accent</md-button>
+    <md-button class="md-warn">Warn</md-button>
 </div>
 </body>
 </html>

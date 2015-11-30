@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+</head>
+<body ng-app="app">
+<script>
+    angular.module('app', ['ngMaterial'])
+            .controller('ctrl', function ($scope, $mdDialog) {
+                $scope.showAlert = function (e) {
+                    $mdDialog.show(
+                            $mdDialog.alert()
+                                    //.parent(angular.element(document.querySelector('body')))
+                                    .title('This is a dialog for the first time')
+                                    .content('This content of dialog box')
+                                    .ok('on on')
+                                    .targetEvent(e)
+                    );
+                };
+            })
+</script>
+<div ng-controller="ctrl">
+    <input type="button" value="Show" ng-click="showAlert()">
+</div>
+
+</body>
+</html>

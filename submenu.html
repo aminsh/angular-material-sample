@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+    <script src="assets/jquery.js"></script>
+
+    <style>
+        .menuBardemoBasicUsage .page-container {
+            background-color: #f1f1f1;
+            padding: 32px; }
+        .menuBardemoBasicUsage .page {
+            margin: 0 auto;
+            background-color: white;
+            padding: 24px;
+            max-width: 680px;
+            box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); }
+        .menuBardemoBasicUsage .page h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-top: 0;
+            font-weight: normal; }
+        .menuBardemoBasicUsage .page p {
+            line-height: 1.6rem; }
+
+    </style>
+</head>
+<body>
+<script>
+    angular
+            .module('MyApp', ['ngMaterial'])
+            .controller('DemoBasicCtrl', function DemoCtrl($mdDialog) {
+
+            });
+    $(function () {
+        $('#saveButton').click(function () {
+            alert('save button ...');
+        });
+
+        $('#saveLink').click(function () {
+            alert('save link ...');
+        });
+    })
+</script>
+<div ng-controller="DemoBasicCtrl as ctrl" ng-cloak="" class="menuBardemoBasicUsage" ng-app="MyApp">
+
+    <input id="saveButton" type="button" value="save button" disabled>
+    <a id="saveLink" href="#" class="bt" style="pointer-events: none">save link</a>
+    <md-menu-bar>
+        <md-menu>
+            <button ng-click="$mdOpenMenu()">
+                File
+            </button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-menu>
+                        <md-button ng-click="$mdOpenMenu()">New</md-button>
+                        <md-menu-content>
+                            <md-menu-item><md-button ng-click="ctrl.sampleAction('New Document', $event)">Document</md-button></md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-menu>
+                        <md-button ng-click="$mdOpenMenu()">New</md-button>
+                        <md-menu-content>
+                            <md-menu-item><md-button ng-click="ctrl.sampleAction('New Document', $event)">Document</md-button></md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-item>
+
+            </md-menu-content>
+        </md-menu>
+
+    </md-menu-bar>
+</div>
+
+
+</body>
+</html>

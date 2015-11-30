@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <script src="assets/jquery.js"></script>
-    <script src="assets/raphael.js"></script>
+    <script src="../assets/jquery.js"></script>
+    <script src="../assets/raphael.js"></script>
 </head>
 <body>
 <script>
@@ -28,10 +28,38 @@
         paper.setViewBox(0, 0, radius, radius, true);
         paper.canvas.setAttribute('preserveAspectRatio', 'none');
     });
+
+    window.onload = function() {
+        var paper = new Raphael(document.getElementById('canvas_container'), 500, 500);
+        var circle = paper.circle(100, 100, 80);
+        var arrow = paper.path("M 100 100 l -56.5 56.5 z");
+        arrow.attr({stroke: '#0a0', 'stroke-width': 3});
+
+
+        arrow.data('rotate',1);
+
+
+
+        rotate_cw(arrow);
+
+
+    }
+
+    function rotate_cw (element){
+        var rotate = element.data('rotate') +1;
+        element.data('rotate', rotate);
+        element.animate({transform:"r-"+element.data('rotate')+",100,100"}, 10,'linear',function(){
+            if(rotate < 360){
+                rotate_cw(element);
+            }
+        });
+    }
 </script>
 <br/>
 
 <div id="container" style="background-color: #00b0ff;width: 500px;height: 500px;"></div>
 
+
+<div id="canvas_container">
 </body>
 </html>
